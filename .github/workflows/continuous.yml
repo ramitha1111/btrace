@@ -50,9 +50,7 @@ jobs:
       - name: Cache Gradle
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
-          path: |
-            ~/.gradle/caches/modules-2
-            ~/.gradle/wrapper
+          path: ~/.gradle/caches
           key: ${{ env.key }}
           restore-keys: |
             ${{ runner.os }}-gradle-
@@ -159,9 +157,7 @@ jobs:
       - name: Cache Gradle
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
-          path: |
-            ~/.gradle/caches/modules-2
-            ~/.gradle/wrapper
+          path: ~/.gradle/caches
           key: ${{ needs.build.outputs.cache-key }}
           restore-keys: |
             ${{ runner.os }}-gradle-
@@ -268,7 +264,6 @@ jobs:
           if [ "${BUILD_RESULT}" != "success" ] || [ "${TEST_RESULT}" != "success" ] || [ "${QE_RESULT}" != "success" ]; then
             echo "::error::build, all test lanes and the qe harness must succeed (build=${BUILD_RESULT}, test=${TEST_RESULT}, qe=${QE_RESULT})"
             exit 1
-          fi
 
   publish:
     if: github.ref == 'refs/heads/develop'
@@ -291,9 +286,7 @@ jobs:
     - name: Cache Gradle
       uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
-        path: |
-          ~/.gradle/caches/modules-2
-          ~/.gradle/wrapper
+        path: ~/.gradle/caches
         key: ${{ needs.build.outputs.cache-key }}
         restore-keys: |
           ${{ runner.os }}-gradle-
